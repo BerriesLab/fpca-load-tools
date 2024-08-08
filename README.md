@@ -278,7 +278,7 @@ where $f(t)$ is the electricity load curve of the i-th day, $c^{(i)}_k$ is the s
 and $\phi_k$ is the k-th FPC of the time series grouped by date. The $c^{(i)}_k$ can be estimated with the linear model:
 
 $$ 
-c^{(i)}_k = w^{(i)}_k,0 + w^{(i)}_k,1 * x^{(i)}_1 + w^{(i)}_k,2 * x^{(i)}_2 + w^{(i)}_k,m * x^{(i)}_m 
+c_k^{(i)} = w_k^{(i)} + w_{k,1}^{(i)} * x_1^{(i)} + w_{k,2}^{(i)} * x_2^{(i)} + ... + w_{k,m}^{(i)} x_m^{(i)} 
 $$
 
 where $c^{(i)}_k$ is the score of the k-th FPC for the i-th day, $x^{(i)}_l$ is the l-th feature for the i-th day, and
