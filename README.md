@@ -8,8 +8,6 @@ These tools are designed for scientists, researchers, and engineers working in a
 optimization. They provide capabilities to apply FPCA to daily electricity load curves and predict future
 consumption patterns based on historical data.
 
-[Click here to run the tutorial on Google Colab.](https://colab.research.google.com/drive/your-notebook-id)
-
 <!-- TOC -->
 * [Installation](#installation)
 * [Overview](#overview)
@@ -251,12 +249,14 @@ FPCA results, similar to the visualizations reported in **D. Beretta et al.**, *
 Volume 21, March 2020, 100308*. These methods include:
 
 - [`plot_functional_boxplot()`](fpca_load/fpca.py): Plots a functional boxplot that overlays all daily load curves with median and
-  interquartile bands.
-- [`plot_fpc()`](fpca_load/fpca.py): Plots the Functional Principal Components (FPCs), rescaled according to their explained variance ratio.
+  interquartile bands. ![Example fo CDF](images/iqr.png)
+- [`plot_fpc()`](fpca_load/fpca.py): Plots the Functional Principal Components (FPCs), rescaled according to their explained variance ratio.![Example fo CDF](images/fpc.png)
 - [`plot_cdf_of_explained_variability()`](fpca_load/fpca.py): Plots the Cumulative Distribution Function (CDF) of the explained
-  variability percentage as a function of the number of FPCs.
-- [`plot_scores_vs_day_of_the_week()`](fpca_load/fpca.py): Plots a boxplot of FPC scores versus the day of the week for the first n FPCs.
-- [`plot_scores_vs_month_of_the_year()`](fpca_load/fpca.py): Plots a boxplot of FPC scores versus the month of the year for the first n FPCs.
+  variability percentage as a function of the number of FPCs. ![Example fo CDF](images/cdf.png)
+- [`plot_scores_vs_day_of_the_week()`](fpca_load/fpca.py): Plots a boxplot of FPC scores versus the day of the week for the first n FPCs. ![Example fo CDF](images/boxplot weekday.png)
+- [`plot_scores_vs_month_of_the_year()`](fpca_load/fpca.py): Plots a boxplot of FPC scores versus the month of the year for the first n FPCs. ![Example fo CDF](images/boxplot month.png)
+
+
 
 **Note**: All above methods collect the data to plot from the [`ElectricityLoadFPCA`](fpca_load/fpca.py) class' attributes. 
 
@@ -297,9 +297,9 @@ predicting the electricity load curves. Specifically:
 
 - [`train_linear_model()`](fpca_load/prediction.py): Trains the model described in section [**The model**](#The-model) 
 iteratively on the first n FPCs using [scikit-learn LinearRegression](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html). This results in n weight matrices, 
-one for each FPC, which are stored as part of the respective objects in the class '**model**' attribute.
+one for each FPC, which are stored as part of the respective objects in the class '**model**' attribute.![Example fo CDF](images/Predicted scores.png)
 - [`predict_daily_electricity_load_curve()`](fpca_load/prediction.py): Predicts the electricity load curve for a specified future date,
-and returns a list of prediction metrics, including the percentage power error.
+and returns a list of prediction metrics, including the percentage power error. ![Example fo CDF](images/predicted load.png)
 
 ### Loading and Saving
 

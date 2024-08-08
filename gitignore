@@ -9,3 +9,6 @@ venv/
 
 # Ignore IDE configuration
 .idea/
+
+# Ignore test directory
+test/
