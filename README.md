@@ -281,8 +281,8 @@ $$
 c_k^{(i)} = w_k^{(i)} + w_{k,1}^{(i)} * x_1^{(i)} + w_{k,2}^{(i)} * x_2^{(i)} + ... + w_{k,m}^{(i)} x_m^{(i)} 
 $$
 
-where $c^{(i)}_k$ is the score of the k-th FPC for the i-th day, $x^{(i)}_l$ is the l-th feature for the i-th day, and
-$w^{(i)}_{k, l}$ is the l-th feature weight for the k-th FPC of the i-th day.
+where $c^{(i)}_k$ is the score of the k-th FPC for the i-th day, $x_l^{(i)}$ is the l-th feature for the i-th day, and
+$w_{k,l}^{(i)}$ is the l-th feature weight for the k-th FPC of the i-th day.
 
 **Note**: Since the model predicts the FPCs scores, and since the FPCs are daily time series, the features must be
 averaged over the day, e.g. the average temperature of the day.
