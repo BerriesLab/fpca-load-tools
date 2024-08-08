@@ -198,7 +198,7 @@ To filter a complete dataset, the user can use the [`filter_complete_data()`](fp
 from the [`ElectricityLoadTimeSeries`](fpca_load/time_series.py) class. This method utilizes four sequentially
 executed methods:
 
-1. [`filter_non_null_entries`](fpca_load/time_series.py): Delete all rows with at least one `None` value.
+1. [`filter_non_null_entries()`](fpca_load/time_series.py): Delete all rows with at least one `None` value.
 2. [`filter_complete_years()`](fpca_load/time_series.py): Remove incomplete years. The default tolerance is set to
    11/12.
 3. [`filter_complete_months()`](fpca_load/time_series.py): Remove incomplete months. The default tolerance is set to 95%
@@ -246,7 +246,7 @@ FPCA results can be saved to and loaded from a pickle file on disk using the fol
 
 ### Displaying FPCA results
 
-The [`ElectricityLoadFPCAResults`](fpca_load/fpca_results.py) class provides several plotting methods for visualizing
+The [`ElectricityLoadFPCAResults`](fpca_load/fpca.py) class provides several plotting methods for visualizing
 FPCA results, similar to the visualizations reported in **D. Beretta et al.**, *Sustainable Energy, Grids and Networks,
 Volume 21, March 2020, 100308*. These methods include:
 
@@ -277,11 +277,10 @@ $$f^{(i)}(t) = \sum{c^{(i)}_k \phi_k} $$
 where $f(t)$ is the electricity load curve of the i-th day, $c^{(i)}_k$ is the score of the k-th FPC for the i-th day,
 and $\phi_k$ is the k-th FPC of the time series grouped by date. The $c^{(i)}_k$ can be estimated with the linear model:
 
-$$ 
-
-c^{(i)}_k = w^{(i)}_{k,0} + w^{(i)}_{k,1} x^{(i)}_{1} + w^{(i)}_{k,2}x^{(i)}_2 + ... + w^{(i)}_{k,m}x^{(i)}_m
-
 $$
+c^{(i)}_k = w^{(i)}_{k,0} + w^{(i)}_{k,1} x^{(i)}_{1} + w^{(i)}_{k,2} x^{(i)}_{2} + \ldots + w^{(i)}_{k,m} x^{(i)}_{m}
+$$
+
 
 where $c^{(i)}_k$ is the score of the k-th FPC for the i-th day, $x^{(i)}_l$ is the l-th feature for the i-th day, and
 $w^{(i)}_{k, l}$ is the l-th feature weight for the k-th FPC of the i-th day.
@@ -291,20 +290,17 @@ averaged over the day, e.g. the average temperature of the day.
 
 ### Prediction
 
-The prediction process is managed by the [`ElectricityLoadRegression`](fpca_load/prediction.py) class. This class can be
-instantiated in two ways:
+The class [`ElectricityLoadRegression`](fpca_load/prediction.py) handles the prediction process. It can be instantiated with or 
+without passing an instance of [`ElectricityLoadFPCA`](fpca_load/fpca.py).
 
-- By passing an instance of [`ElectricityLoadFPCA`](fpca_load/fpca.py).
-- Without arguments, resulting in an empty instance of [`ElectricityLoadRegression`](fpca_load/prediction.py).
-
-The [`ElectricityLoadRegression`](fpca_load/prediction.py) class provides methods for training a linear model and
-predicting electricity load curves
-for specific future dates. Specifically:
+The [`ElectricityLoadRegression`](fpca_load/prediction.py) class provides a method for training a linear model and a method for
+predicting the electricity load curves. Specifically:
 
 - [`train_linear_model()`](fpca_load/prediction.py): Trains the model described in section [**The model**](#The-model) 
-iteratively on the first n FPCs using using [scikit-learn LinearRegression](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html). This results in n weight matrices, 
-one for each FPC, which are stored as object's '**model**' attribute.
-- [`predict_daily_electricity_load_curve()`](fpca_load/prediction.py): Predicts the electricity load curve for a specified future date.
+iteratively on the first n FPCs using [scikit-learn LinearRegression](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html). This results in n weight matrices, 
+one for each FPC, which are stored as part of the respective objects in the class '**model**' attribute.
+- [`predict_daily_electricity_load_curve()`](fpca_load/prediction.py): Predicts the electricity load curve for a specified future date,
+and returns a list of prediction metrics, including the percentage power error.
 
 ### Loading and Saving
 
