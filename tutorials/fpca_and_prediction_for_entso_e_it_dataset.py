@@ -20,7 +20,7 @@ ts.augment_time_series_with_day_of_the_week()
 
 # Instantiate an ElectricityLoadFPCA object by passing an ElectricityLoadTimeSeries object.
 # Note that the ElectricityLoadTimeSeries is passed as a reference, not as copy.
-# Therefore, any change made to the ElectricityLoadTimeSeries object outside of the ElectricityLoadFPCA
+# Therefore, any change made to the ElectricityLoadTimeSeries object outside the ElectricityLoadFPCA
 # will affect the data processed by ElectricityLoadFPCA.
 fpca = ElectricityLoadFPCA(time_series=ts)
 # Display a functional plot of all daily time series
@@ -39,7 +39,7 @@ fpca.plot_scores_vs_month_of_the_year()
 
 # Instantiate an ElectricityLoadRegression object by passing an ElectricityLoadFPCA object.
 # Note that the ElectricityLoadFPCA is passed as a reference, not as copy.
-# Therefore, any changes made to the ElectricityLoadFPCA object outside of the ElectricityLoadRegression object
+# Therefore, any changes made to the ElectricityLoadFPCA object outside the ElectricityLoadRegression object
 # will affect the data processed by ElectricityLoadRegression.
 prediction = ElectricityLoadRegression(fpca=fpca)
 # Train a linear model
