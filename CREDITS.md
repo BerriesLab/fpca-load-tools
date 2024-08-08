@@ -25,6 +25,6 @@
 
 ### Original Work
 
-This project is based on the work by **D. Beretta et al.**, *Sustainable Energy, Grids and Networks, Volume 21, March 2020, 100308*. 
-See the [manuscript](https://www.sciencedirect.com/science/article/abs/pii/S2352467719304461) for a detailed explanation 
-of the methodology.
+This project is based on the work by **D. Beretta et al.**, *Sustainable Energy, Grids and Networks, Volume 21, March 2020,
+100308*.
+See the [manuscript](https://www.sciencedirect.com/science/article/abs/pii/S2352467719304461) for a detailed explanation of the methodology.
