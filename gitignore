@@ -1,0 +1,11 @@
+# Ignore macOS .DS_Store files
+.DS_Store
+
+# Ignore Python bytecode files
+__pycache__/
+
+# Ignore virtual environment directory
+venv/
+
+# Ignore IDE configuration
+.idea/

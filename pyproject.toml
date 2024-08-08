@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fpca_load_tools"
+version = "1.0.0"
+description = "Tools for Functional Principal Component Analysis and Functional Regression of electricity load curves."
+authors = [{ name = "Davide Beretta", email = "mail.davide.beretta+github@gmail.com" }]
+urls = {"Homepage" = "https://github.com/BerriesLab/fpca-load_tools"}
+license = {file = "LICENSE.md" }  # Path to your license file
+
+[tool.setuptools.packages.find]
+where = []
+include = []
+
+[tool.setuptools.package-data]
+fpca_load = ["data/**"]
+
+#[tool.setuptools.entry-points]
+#console_scripts = []
