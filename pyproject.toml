@@ -15,7 +15,7 @@ where = []
 include = []
 
 [tool.setuptools.package-data]
-fpca_load_tools = ["data/**", "images/**"]
+fpca_load_tools = ["data/**"]
 
 #[tool.setuptools.entry-points]
 #console_scripts = []
