@@ -10,6 +10,26 @@ consumption patterns based on historical data.
 
 [Click here to run the tutorial on Google Colab.](https://colab.research.google.com/drive/your-notebook-id)
 
+<!-- TOC -->
+* [Installation](#installation)
+* [Overview](#overview)
+* [Time Series](#time-series)
+  * [Loading time series](#loading-time-series)
+  * [Converting between UTC and Local time](#converting-between-utc-and-local-time)
+  * [Filtering complete time-series](#filtering-complete-time-series)
+* [FPCA](#fpca)
+  * [Applying FPCA](#applying-fpca)
+  * [Saving and loading FPCA results](#saving-and-loading-fpca-results)
+  * [Displaying FPCA results](#displaying-fpca-results)
+* [Functional Regression](#functional-regression)
+  * [The model](#the-model)
+  * [Prediction](#prediction)
+  * [Loading and Saving](#loading-and-saving)
+* [Contributing](#contributing)
+* [Credits](#credits)
+* [License](#license)
+<!-- TOC -->
+
 ## Installation
 
 The `fpca-load-tools` can be installed either via pip or by cloning this repository.
@@ -35,7 +55,7 @@ To install the app by cloning the repository to your local machine, follow these
   ```bash
   pip install -r requirements.txt
 
-## How to use
+## Overview
 
 **fpca-load-tools** is designed around three main classes:
 
@@ -257,7 +277,11 @@ $$f^{(i)}(t) = \sum{c^{(i)}_k \phi_k} $$
 where $f(t)$ is the electricity load curve of the i-th day, $c^{(i)}_k$ is the score of the k-th FPC for the i-th day,
 and $\phi_k$ is the k-th FPC of the time series grouped by date. The $c^{(i)}_k$ can be estimated with the linear model:
 
-$$ c^{(i)}_k = w^{(i)}_{k,0} + w^{(i)}_{k,1} x^{(i)}_{1} + w^{(i)}_{k,2}x^{(i)}_2 + ... + w^{(i)}_{k,m}x^{(i)}_m$$
+$$ 
+
+c^{(i)}_k = w^{(i)}_{k,0} + w^{(i)}_{k,1} x^{(i)}_{1} + w^{(i)}_{k,2}x^{(i)}_2 + ... + w^{(i)}_{k,m}x^{(i)}_m
+
+$$
 
 where $c^{(i)}_k$ is the score of the k-th FPC for the i-th day, $x^{(i)}_l$ is the l-th feature for the i-th day, and
 $w^{(i)}_{k, l}$ is the l-th feature weight for the k-th FPC of the i-th day.
