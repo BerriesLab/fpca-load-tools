@@ -57,16 +57,16 @@ To install the app by cloning the repository to your local machine, follow these
 
 **fpca-load-tools** is designed around three main classes:
 
-- [`ElectricityLoadTimeSeries`](fpca_load/time_series.py): Manages time series data within a Pandas DataFrame, including
+- [`ElectricityLoadTimeSeries`](fpca_load_tools/time_series.py): Manages time series data within a Pandas DataFrame, including
   pre-processing operations such as filtering for complete time series and augmenting time series with calendar
   information.
-- [`ElectricityLoadFPCA`](fpca_load/fpca.py): Applies Functional Principal Component Analysis (FPCA) to daily
+- [`ElectricityLoadFPCA`](fpca_load_tools/fpca.py): Applies Functional Principal Component Analysis (FPCA) to daily
   electricity load curves. This class requires an ElectricityLoadTimeSeries object as attribute.
     - **Note 1**: The ElectricityLoadTimeSeries object is stored as a reference in ElectricityLoadFPCA. Therefore, any
       changes made to the ElectricityLoadTimeSeries object outside ElectricityLoadFPCA will also affect the data being
       processed by the FPCA.
     - **Note 2**: The results of the FPCA, including the scores, are stored in the *results* attribute of the class.
-- [`ElectricityLoadRegression`](fpca_load/prediction.py): Trains a model and predicts daily electricity load curves
+- [`ElectricityLoadRegression`](fpca_load_tools/prediction.py): Trains a model and predicts daily electricity load curves
   using FPCA data. It requires an ElectricityLoadFPCA object as attribute.
     - **Note 1**: The ElectricityLoadFPCA object is stored as a reference in ElectricityLoadRegression.Therefore, any
       modifications to the ElectricityLoadFPCA object outside ElectricityLoadRegression will affect the data being
@@ -132,7 +132,7 @@ classDiagram
 
 ### Loading time series
 
-Users can load time series from CSV files using the [`load_time_series()`](fpca_load/time_series.py) method of the
+Users can load time series from CSV files using the [`load_time_series()`](fpca_load_tools/time_series.py) method of the
 ElectricityLoadTimeSeries class. The expected data structure in the CSV file is:
 
 | utc_timestamp | load | feature_1 | feature_2 | ... | feature_n |
@@ -147,7 +147,7 @@ Upon loading, the CSV file is converted into a Pandas DataFrame with a **DateTim
 
 Users can load multiple files and features as needed. The method automatically merges new CSV files with the existing
 DataFrame in memory on the **DateTimeIndex**. Users should ensure that only one column named **load** is present in
-memory. To help the user, [`load_time_series()`](fpca_load/time_series.py) allows to select which columns to load from
+memory. To help the user, [`load_time_series()`](fpca_load_tools/time_series.py) allows to select which columns to load from
 teh CSV file and to choose the names for these columns in the destination DataFrame. If multiple columns with the same
 name are loaded, Pandas will handle them by renaming the new columns with suffixes (e.g., **column_name_r**).
 
@@ -157,7 +157,7 @@ An example of meteorological time series data that could be merged with the elec
 |---------------|-------------|-----------|-------------------|
 | ...           | ...         | ...       | ...               |
 
-To save time series data to CSV files, users can use the [`save_time_series()`](fpca_load/time_series.py) method.
+To save time series data to CSV files, users can use the [`save_time_series()`](fpca_load_tools/time_series.py) method.
 
 ### Converting between UTC and Local time
 
@@ -170,8 +170,8 @@ times during mornings and evenings). Similarly, for **operational planning**, su
 response activities, local time aligns better with the actual timing of events and conditions experienced by consumers
 and grid operators.
 
-To facilitate this, the [`ElectricityLoadTimeSeries`](fpca_load/time_series.py) class includes the
-method [`convert_utc_to_local_timestamp`](fpca_load/time_series.py), which converts the UTC DateTimeIndex to the
+To facilitate this, the [`ElectricityLoadTimeSeries`](fpca_load_tools/time_series.py) class includes the
+method [`convert_utc_to_local_timestamp`](fpca_load_tools/time_series.py), which converts the UTC DateTimeIndex to the
 corresponding local timestamp. This method requires the user to specify the geographical area in [Olson Timezone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) format.
 
 It is important to note that converting from UTC to local time, including accounting for daylight saving time, can
@@ -192,24 +192,24 @@ completeness criteria are as follows:
 - **Day Completeness**: A day is considered complete if the number of non-null entries meets or exceeds a tolerance
   percentage of the expected number of entries. By default, this tolerance level is set to 100% of the expected entries.
 
-To filter a complete dataset, the user can use the [`filter_complete_data()`](fpca_load/time_series.py) method
-from the [`ElectricityLoadTimeSeries`](fpca_load/time_series.py) class. This method utilizes four sequentially
+To filter a complete dataset, the user can use the [`filter_complete_data()`](fpca_load_tools/time_series.py) method
+from the [`ElectricityLoadTimeSeries`](fpca_load_tools/time_series.py) class. This method utilizes four sequentially
 executed methods:
 
-1. [`filter_non_null_entries()`](fpca_load/time_series.py): Delete all rows with at least one `None` value.
-2. [`filter_complete_years()`](fpca_load/time_series.py): Remove incomplete years. The default tolerance is set to
+1. [`filter_non_null_entries()`](fpca_load_tools/time_series.py): Delete all rows with at least one `None` value.
+2. [`filter_complete_years()`](fpca_load_tools/time_series.py): Remove incomplete years. The default tolerance is set to
    11/12.
-3. [`filter_complete_months()`](fpca_load/time_series.py): Remove incomplete months. The default tolerance is set to 95%
+3. [`filter_complete_months()`](fpca_load_tools/time_series.py): Remove incomplete months. The default tolerance is set to 95%
    of the month’s calendar days.
-4. [`filter_complete_days()`](fpca_load/time_series.py): Remove incomplete days. The default tolerance is set to 100% of the
+4. [`filter_complete_days()`](fpca_load_tools/time_series.py): Remove incomplete days. The default tolerance is set to 100% of the
    mode of the time series grouped by date.
 
-**Note 1**: As the first step, entries with null data are dropped by the [`filter_non_null_entries`](fpca_load/time_series.py) method. This is
+**Note 1**: As the first step, entries with null data are dropped by the [`filter_non_null_entries`](fpca_load_tools/time_series.py) method. This is
 essential because the subsequent methods only evaluate the DateTimeIndex values, regardless of the columns actual values.
 
 **Note 2**: When filtering days with a tolerance level less than 100% or converting timestamps from UTC to local time, the
 resulting time series may include missing values. To address this, the user can use
-the [`resample_days()`](fpca_load/time_series.py) method. This method resamples the time series daily with a
+the [`resample_days()`](fpca_load_tools/time_series.py) method. This method resamples the time series daily with a
 user-defined frequency (defaulting to one hour). Missing values are linearly interpolated between their nearest
 neighbors, and any remaining None values at the beginning or end of an interpolated period are filled with the nearest
 neighbor value.
@@ -221,44 +221,44 @@ a feature. In the context of FPCA, the "features" are values of the functions at
 
 ### Applying FPCA
 
-The class [`ElectricityLoadFPCA`](fpca_load/fpca.py) offers three methods to apply three different types of FPCAs:
+The class [`ElectricityLoadFPCA`](fpca_load_tools/fpca.py) offers three methods to apply three different types of FPCAs:
 
-- [`apply_fpca_to_all_days_grouped_by_date()`](fpca_load/fpca.py): Applies FPCA to daily curves grouped by date.
-- [`apply_fpca_to_all_days_grouped_by_weekday()`](fpca_load/fpca.py): Applies FPCA to daily curves grouped by day of
+- [`apply_fpca_to_all_days_grouped_by_date()`](fpca_load_tools/fpca.py): Applies FPCA to daily curves grouped by date.
+- [`apply_fpca_to_all_days_grouped_by_weekday()`](fpca_load_tools/fpca.py): Applies FPCA to daily curves grouped by day of
   the week.
-- [`apply_fpca_to_all_days_grouped_by_month()`](fpca_load/fpca.py): Applies FPCA to daily curves grouped by month of
+- [`apply_fpca_to_all_days_grouped_by_month()`](fpca_load_tools/fpca.py): Applies FPCA to daily curves grouped by month of
   the year.
 
-The results from each FPCA are stored in an instance of the [`ElectricityLoadFPCAResults`](fpca_load/fpca.py)
-class, which is the '**results**' attribute of [`ElectricityLoadFPCA`](fpca_load/fpca.py).Note that only one result
+The results from each FPCA are stored in an instance of the [`ElectricityLoadFPCAResults`](fpca_load_tools/fpca.py)
+class, which is the '**results**' attribute of [`ElectricityLoadFPCA`](fpca_load_tools/fpca.py).Note that only one result
 per FPCA type can be stored at a time: performing an analysis again will overwrite any previous results. For example,
-running [`apply_fpca_to_all_days_grouped_by_date()`](fpca_load/fpca.py) a second time will replace the results from the
+running [`apply_fpca_to_all_days_grouped_by_date()`](fpca_load_tools/fpca.py) a second time will replace the results from the
 first analysis.
 
 ### Saving and loading FPCA results
 
 FPCA results can be saved to and loaded from a pickle file on disk using the following methods:
 
-- [`save_fpca_results()`](fpca_load/fpca.py)
-- [`load_fpca_results()`](fpca_load/fpca.py).
+- [`save_fpca_results()`](fpca_load_tools/fpca.py)
+- [`load_fpca_results()`](fpca_load_tools/fpca.py).
 
 ### Displaying FPCA results
 
-The [`ElectricityLoadFPCAResults`](fpca_load/fpca.py) class provides several plotting methods for visualizing
+The [`ElectricityLoadFPCAResults`](fpca_load_tools/fpca.py) class provides several plotting methods for visualizing
 FPCA results, similar to the visualizations reported in **D. Beretta et al.**, *Sustainable Energy, Grids and Networks,
 Volume 21, March 2020, 100308*. These methods include:
 
-- [`plot_functional_boxplot()`](fpca_load/fpca.py): Plots a functional boxplot that overlays all daily load curves with median and
+- [`plot_functional_boxplot()`](fpca_load_tools/fpca.py): Plots a functional boxplot that overlays all daily load curves with median and
   interquartile bands. ![Example fo CDF](images/iqr.png)
-- [`plot_fpc()`](fpca_load/fpca.py): Plots the Functional Principal Components (FPCs), rescaled according to their explained variance ratio.![Example fo CDF](images/fpc.png)
-- [`plot_cdf_of_explained_variability()`](fpca_load/fpca.py): Plots the Cumulative Distribution Function (CDF) of the explained
+- [`plot_fpc()`](fpca_load_tools/fpca.py): Plots the Functional Principal Components (FPCs), rescaled according to their explained variance ratio.![Example fo CDF](images/fpc.png)
+- [`plot_cdf_of_explained_variability()`](fpca_load_tools/fpca.py): Plots the Cumulative Distribution Function (CDF) of the explained
   variability percentage as a function of the number of FPCs. ![Example fo CDF](images/cdf.png)
-- [`plot_scores_vs_day_of_the_week()`](fpca_load/fpca.py): Plots a boxplot of FPC scores versus the day of the week for the first n FPCs. ![Example fo CDF](images/boxplot weekday.png)
-- [`plot_scores_vs_month_of_the_year()`](fpca_load/fpca.py): Plots a boxplot of FPC scores versus the month of the year for the first n FPCs. ![Example fo CDF](images/boxplot month.png)
+- [`plot_scores_vs_day_of_the_week()`](fpca_load_tools/fpca.py): Plots a boxplot of FPC scores versus the day of the week for the first n FPCs. ![Example fo CDF](images/boxplot weekday.png)
+- [`plot_scores_vs_month_of_the_year()`](fpca_load_tools/fpca.py): Plots a boxplot of FPC scores versus the month of the year for the first n FPCs. ![Example fo CDF](images/boxplot month.png)
 
 
 
-**Note**: All above methods collect the data to plot from the [`ElectricityLoadFPCA`](fpca_load/fpca.py) class' attributes. 
+**Note**: All above methods collect the data to plot from the [`ElectricityLoadFPCA`](fpca_load_tools/fpca.py) class' attributes. 
 
 ## Functional Regression
 
@@ -289,24 +289,24 @@ averaged over the day, e.g. the average temperature of the day.
 
 ### Prediction
 
-The class [`ElectricityLoadRegression`](fpca_load/prediction.py) handles the prediction process. It can be instantiated with or 
-without passing an instance of [`ElectricityLoadFPCA`](fpca_load/fpca.py).
+The class [`ElectricityLoadRegression`](fpca_load_tools/prediction.py) handles the prediction process. It can be instantiated with or 
+without passing an instance of [`ElectricityLoadFPCA`](fpca_load_tools/fpca.py).
 
-The [`ElectricityLoadRegression`](fpca_load/prediction.py) class provides a method for training a linear model and a method for
+The [`ElectricityLoadRegression`](fpca_load_tools/prediction.py) class provides a method for training a linear model and a method for
 predicting the electricity load curves. Specifically:
 
-- [`train_linear_model()`](fpca_load/prediction.py): Trains the model described in section [**The model**](#The-model) 
+- [`train_linear_model()`](fpca_load_tools/prediction.py): Trains the model described in section [**The model**](#The-model) 
 iteratively on the first n FPCs using [scikit-learn LinearRegression](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html). This results in n weight matrices, 
 one for each FPC, which are stored as part of the respective objects in the class '**model**' attribute.![Example fo CDF](images/Predicted scores.png)
-- [`predict_daily_electricity_load_curve()`](fpca_load/prediction.py): Predicts the electricity load curve for a specified future date,
+- [`predict_daily_electricity_load_curve()`](fpca_load_tools/prediction.py): Predicts the electricity load curve for a specified future date,
 and returns a list of prediction metrics, including the percentage power error. ![Example fo CDF](images/predicted load.png)
 
 ### Loading and Saving
 
 The ElectricityLoadRegression class includes methods for saving and loading the model parameters and the feature scaler:
 
-- [`save_model()`](fpca_load/prediction.py): Saves the model and feature scaler to pickle file.
-- [`load_model()`](fpca_load/prediction.py): Loads a previously saved model and feature scaler from pickle file.
+- [`save_model()`](fpca_load_tools/prediction.py): Saves the model and feature scaler to pickle file.
+- [`load_model()`](fpca_load_tools/prediction.py): Loads a previously saved model and feature scaler from pickle file.
 
 ## Contributing
 

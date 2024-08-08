@@ -4,7 +4,7 @@ import pickle
 import matplotlib.pyplot as plt
 import matplotlib.cm
 from matplotlib.colors import Normalize
-from fpca_load.fpca import ElectricityLoadFPCA
+from fpca_load_tools.fpca import ElectricityLoadFPCA
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import r2_score, root_mean_squared_error
 from sklearn.preprocessing import StandardScaler

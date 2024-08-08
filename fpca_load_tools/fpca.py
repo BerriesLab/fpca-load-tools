@@ -3,7 +3,7 @@ import pickle
 import os
 import numpy as np
 import matplotlib.pyplot as plt
-from fpca_load.time_series import ElectricityLoadTimeSeries
+from fpca_load_tools.time_series import ElectricityLoadTimeSeries
 from sklearn.decomposition import PCA
 
 

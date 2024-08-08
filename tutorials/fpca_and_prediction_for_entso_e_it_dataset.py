@@ -1,6 +1,6 @@
-from fpca_load.time_series import ElectricityLoadTimeSeries
-from fpca_load.fpca import ElectricityLoadFPCA
-from fpca_load.prediction import ElectricityLoadRegression
+from fpca_load_tools.time_series import ElectricityLoadTimeSeries
+from fpca_load_tools.fpca import ElectricityLoadFPCA
+from fpca_load_tools.prediction import ElectricityLoadRegression
 
 # Instantiate an ElectricityLoadTimeSeries object.
 ts = ElectricityLoadTimeSeries()
