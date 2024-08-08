@@ -355,8 +355,9 @@ requests.
 
 ## Credits
 
-This app has been developed by **D. Beretta**, building on the work by **D. Beretta et al.**, Sustainable Energy Fuels,
-2017, 1, 174-190. Please refer to [CREDITS.md](CREDITS.md) and [CITATION.md](CITATION.cff) for more details.
+This app has been developed by **D. Beretta**, building on the work by **D. Beretta et al.**, *Sustainable Energy, 
+Grids and Networks, Volume 21, March 2020, 100308*. Please refer to [CREDITS.md](CREDITS.md) and [CITATION.md](CITATION.cff) 
+for more details.
 
 ## License
 
