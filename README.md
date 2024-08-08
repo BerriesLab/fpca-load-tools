@@ -249,26 +249,41 @@ FPCA results, similar to the visualizations reported in **D. Beretta et al.**, *
 Volume 21, March 2020, 100308*. These methods include:
 
 - [`plot_functional_boxplot()`](fpca_load_tools/fpca.py): Plots a functional boxplot that overlays all daily load curves with median and
-  interquartile bands. 
+  interquartile bands.
 
-![Example of iqr](images/iqr.png)
+<div id="fig_params" align="center"> 
+    <img src="images/iqr.png" alt="" width="500">
+    <p><b>Figure 1:</b> Functional boxplot for a representative dataset.</p>
+</div>
 
 - [`plot_fpc()`](fpca_load_tools/fpca.py): Plots the Functional Principal Components (FPCs), rescaled according to their explained variance ratio.
 
-![Example of fpc](images/fpc.png)
+<div id="fig_params" align="center"> 
+    <img src="images/fpc.png" alt="" width="500">
+    <p><b>Figure 2:</b> FPCs of a representative dataset rescaled by their explained variance ratio.</p>
+</div>
 
 - [`plot_cdf_of_explained_variability()`](fpca_load_tools/fpca.py): Plots the Cumulative Distribution Function (CDF) of the explained
   variability percentage as a function of the number of FPCs. 
 
-![Example of iqr](images/cdf.png)
+<div id="fig_params" align="center"> 
+    <img src="images/cdf.png" alt="" width="500">
+    <p><b>Figure 3:</b> CDF of a representative dataset.</p>
+</div>
 
 - [`plot_scores_vs_day_of_the_week()`](fpca_load_tools/fpca.py): Plots a boxplot of FPC scores versus the day of the week for the first n FPCs. 
 
-![Example of scores 1](images/boxplot_weekday.png)
+<div id="fig_params" align="center"> 
+    <img src="images/boxplot_weekday.png" alt="" width="500">
+    <p><b>Figure 4:</b> Scores boxplot of a representative dataset vs day of the week.</p>
+</div>
 
 - [`plot_scores_vs_month_of_the_year()`](fpca_load_tools/fpca.py): Plots a boxplot of FPC scores versus the month of the year for the first n FPCs. 
 
-![Example of scores 2](images/boxplot_month.png)
+<div id="fig_params" align="center"> 
+    <img src="images/boxplot_month.png" alt="" width="500">
+    <p><b>Figure 5:</b> Scores boxplot of a representative dataset vs month of the year.</p>
+</div>
 
 
 
@@ -313,12 +328,18 @@ predicting the electricity load curves. Specifically:
 iteratively on the first n FPCs using [scikit-learn LinearRegression](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html). This results in n weight matrices, 
 one for each FPC, which are stored as part of the respective objects in the class '**model**' attribute. 
 
-![Example of scores prediction](images/predicted_scores.png)
+<div id="fig_params" align="center"> 
+    <img src="images/predicted_scores.png" alt="" width="500">
+    <p><b>Figure 6:</b> Actual vs predicted scores of FPC1 for a representative dataset.</p>
+</div>
 
 - [`predict_daily_electricity_load_curve()`](fpca_load_tools/prediction.py): Predicts the electricity load curve for a specified future date,
 and returns a list of prediction metrics, including the percentage power error.
 
-![Example of load prediction](images/predicted_load.png)
+<div id="fig_params" align="center"> 
+    <img src="images/predicted_load.png" alt="" width="500">
+    <p><b>Figure 7:</b> Actual vs predicted electricity load curve.</p>
+</div>
 
 ### Loading and Saving
 
