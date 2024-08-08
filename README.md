@@ -1,5 +1,7 @@
 # Functional Principal Component Analysis and Functional Regression Tools for Electricity Load Curves
 
+[![DOI](https://zenodo.org/badge/833331997.svg)](https://zenodo.org/doi/10.5281/zenodo.13273085)
+
 Based on the work by [**D. Beretta et al.**, *Sustainable Energy, Grids and Networks, Volume 21, March 2020,
 100308*](https://www.sciencedirect.com/science/article/abs/pii/S2352467719304461).
 Readers are encouraged to consult the manuscript to master the methodology.
