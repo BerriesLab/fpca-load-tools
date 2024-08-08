@@ -250,15 +250,24 @@ Volume 21, March 2020, 100308*. These methods include:
 
 - [`plot_functional_boxplot()`](fpca_load_tools/fpca.py): Plots a functional boxplot that overlays all daily load curves with median and
   interquartile bands. 
+
 ![Example of iqr](images/iqr.png)
+
 - [`plot_fpc()`](fpca_load_tools/fpca.py): Plots the Functional Principal Components (FPCs), rescaled according to their explained variance ratio.
+
 ![Example of fpc](images/fpc.png)
+
 - [`plot_cdf_of_explained_variability()`](fpca_load_tools/fpca.py): Plots the Cumulative Distribution Function (CDF) of the explained
   variability percentage as a function of the number of FPCs. 
+
 ![Example of iqr](images/cdf.png)
+
 - [`plot_scores_vs_day_of_the_week()`](fpca_load_tools/fpca.py): Plots a boxplot of FPC scores versus the day of the week for the first n FPCs. 
+
 ![Example of scores 1](images/boxplot_weekday.png)
+
 - [`plot_scores_vs_month_of_the_year()`](fpca_load_tools/fpca.py): Plots a boxplot of FPC scores versus the month of the year for the first n FPCs. 
+
 ![Example of scores 2](images/boxplot_month.png)
 
 
@@ -303,9 +312,12 @@ predicting the electricity load curves. Specifically:
 - [`train_linear_model()`](fpca_load_tools/prediction.py): Trains the model described in section [**The model**](#The-model) 
 iteratively on the first n FPCs using [scikit-learn LinearRegression](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html). This results in n weight matrices, 
 one for each FPC, which are stored as part of the respective objects in the class '**model**' attribute. 
+
 ![Example of scores prediction](images/predicted_scores.png)
+
 - [`predict_daily_electricity_load_curve()`](fpca_load_tools/prediction.py): Predicts the electricity load curve for a specified future date,
 and returns a list of prediction metrics, including the percentage power error.
+
 ![Example of load prediction](images/predicted_load.png)
 
 ### Loading and Saving
