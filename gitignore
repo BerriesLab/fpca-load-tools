@@ -12,3 +12,6 @@ venv/
 
 # Ignore test directory
 test/
+
+# Ignore the release directory
+release/
