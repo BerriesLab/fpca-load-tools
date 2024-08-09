@@ -25,6 +25,7 @@ consumption patterns based on historical data.
   * [The model](#the-model)
   * [Prediction](#prediction)
   * [Loading and Saving](#loading-and-saving)
+* [Tutorial](#tutorial)
 * [Contributing](#contributing)
 * [Credits](#credits)
 * [License](#license)
@@ -349,6 +350,9 @@ The ElectricityLoadRegression class includes methods for saving and loading the 
 
 - [`save_model()`](fpca_load_tools/prediction.py): Saves the model and feature scaler to pickle file.
 - [`load_model()`](fpca_load_tools/prediction.py): Loads a previously saved model and feature scaler from pickle file.
+
+## Tutorial
+Please follow the [tutorial](tutorials/fpca_and_prediction_for_entso_e_it_dataset.py) to learn how to use `fpca-load-tools` in practice.
 
 ## Contributing
 
