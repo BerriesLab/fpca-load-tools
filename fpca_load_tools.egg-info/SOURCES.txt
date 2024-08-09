@@ -1,0 +1,10 @@
+CREDITS.md
+LICENSE
+MANIFEST.in
+README.md
+pyproject.toml
+setup.py
+fpca_load_tools.egg-info/PKG-INFO
+fpca_load_tools.egg-info/SOURCES.txt
+fpca_load_tools.egg-info/dependency_links.txt
+fpca_load_tools.egg-info/top_level.txt

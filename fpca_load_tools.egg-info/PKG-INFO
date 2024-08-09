@@ -1,0 +1,7 @@
+Metadata-Version: 2.1
+Name: fpca_load_tools
+Version: 1.0.0
+Summary: Tools for Functional Principal Component Analysis and Functional Regression of electricity load curves.
+Author-email: Davide Beretta <mail.davide.beretta+github@gmail.com>
+Project-URL: Homepage, https://github.com/BerriesLab/fpca-load_tools
+License-File: LICENSE
